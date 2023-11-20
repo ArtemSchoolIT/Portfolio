@@ -2,6 +2,13 @@
 
 from pygame import *
 import classes as cl
+import os
+from pathlib import Path
+
+# читаем файл
+DIR = Path(__file__).resolve().parent  # путь до текущей папки
+# print(DIR)
+os.chdir(DIR)  # перейти в папку по пути
 
 move_right = False
 move_left = False
@@ -18,14 +25,14 @@ x_wall = 150
 BLUE = ((0,0,255))
 WIN_HIGHT = 700
 WIN_WIGHT = 500
-picture = transform.scale(image.load('img/Bg.jpeg'),(WIN_HIGHT,WIN_WIGHT))
-player = cl.Player(400,400,100,100,'img/Happy_Alien.png',3,2)
-enemy = cl.Enemy(200,50,50,50,'img/enemy.png',2,2)
-final = cl.Sprite(400,50,100,100,'img/ball.png')
-win_screen = cl.Sprite(0,0,700,500,'img/win.png')
-lose_screen = cl.Sprite(0,0,700,500,'img/lose.png')
+picture = transform.scale(image.load(DIR/'img/Bg.jpeg'),(WIN_HIGHT,WIN_WIGHT))
+player = cl.Player(400,400,100,100,DIR/'img/Happy_Alien.png',3,2)
+enemy = cl.Enemy(200,50,50,50,DIR/'img/enemy.png',2,2)
+final = cl.Sprite(400,50,100,100,DIR/'img/ball.png')
+win_screen = cl.Sprite(0,0,700,500,DIR/'img/win.png')
+lose_screen = cl.Sprite(0,0,700,500,DIR/'img/lose.png')
 for i in range(4):
-    wall = cl.Sprite(x_wall,250,125,75,'img/Wall.png')
+    wall = cl.Sprite(x_wall,250,125,75,DIR/'img/Wall.png')
     walls.append(wall)
     x_wall += 150
 
@@ -37,13 +44,13 @@ while run:
     for e in event.get():
         if e.type == MOUSEBUTTONDOWN and e.button == 1:
             if look_bul == 'right':
-                player.shot(20,10,'img/Bullet_Hor.png',look_bul,bullets)
+                player.shot(20,10,DIR/'img/Bullet_Hor.png',look_bul,bullets)
             elif look_bul == 'up':
-                player.shot(10,20,'img/Bullet.png',look_bul,bullets)
+                player.shot(10,20,DIR/'img/Bullet.png',look_bul,bullets)
             elif look_bul == 'down':
-                player.shot(10,20,'img/Bullet.png',look_bul,bullets)
+                player.shot(10,20,DIR/'img/Bullet.png',look_bul,bullets)
             elif look_bul == 'left':
-                player.shot(20,10,'img/Bullet_Hor.png',look_bul,bullets)
+                player.shot(20,10,DIR/'img/Bullet_Hor.png',look_bul,bullets)
         if e.type == QUIT:
             run = False
         if e.type == KEYDOWN:
